@@ -1,4 +1,4 @@
-import { Col, Row, Divider, DatePicker, Checkbox, Modal } from "antd";
+import { Col, Row, Divider, DatePicker, Checkbox } from "antd";
 import React, { useState, useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import DefaultLayout from "../components/DefaultLayout";
@@ -9,8 +9,9 @@ import { bookCar } from "../redux/actions/bookingActions";
 import StripeCheckout from "react-stripe-checkout";
 import AOS from 'aos';
 
-import 'aos/dist/aos.css'; // You can also use <link> for styles
+import 'aos/dist/aos.css';
 const { RangePicker } = DatePicker;
+
 function BookingCar({ match }) {
   const { cars } = useSelector((state) => state.carsReducer);
   const { loading } = useSelector((state) => state.alertsReducer);
@@ -23,20 +24,26 @@ function BookingCar({ match }) {
   const [totalAmount, setTotalAmount] = useState(0);
   const [showModal, setShowModal] = useState(false);
 
+  // initialize AOS animation library
+  useEffect(() => {
+    AOS.init({ duration: 1500 });
+  }, []);
+
   useEffect(() => {
     if (cars.length === 0) {
       dispatch(getAllCars());
     } else {
       setcar(cars.find((o) => o._id === match.params.carid));
     }
-  }, [cars]);
+  }, [cars, dispatch, match.params.carid]);
 
   useEffect(() => {
-    setTotalAmount(totalHours * car.rentPerHour);
+    let amount = totalHours * car.rentPerHour;
     if (driver) {
-      setTotalAmount(totalAmount + 30 * totalHours);
+      amount += 30 * totalHours;
     }
-  }, [driver, totalHours]);
+    setTotalAmount(amount);
+  }, [driver, totalHours, car.rentPerHour]);
 
   function selectTimeSlots(values) {
     setFrom(moment(values[0]).format("MMM DD yyyy HH:mm"));

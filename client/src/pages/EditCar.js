@@ -3,7 +3,7 @@ import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import DefaultLayout from "../components/DefaultLayout";
 import Spinner from "../components/Spinner";
-import { addCar, editCar, getAllCars } from "../redux/actions/carsActions";
+import { editCar, getAllCars } from "../redux/actions/carsActions";
 function EditCar({ match }) {
   const { cars } = useSelector((state) => state.carsReducer);
   const dispatch = useDispatch();
@@ -18,7 +18,7 @@ function EditCar({ match }) {
       setcar(cars.find((o) => o._id === match.params.carid));
       console.log(car);
     }
-  }, [cars]);
+  }, [cars, dispatch, match.params.carid]);
 
   function onFinish(values) {
     values._id = car._id;
