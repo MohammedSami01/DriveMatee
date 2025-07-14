@@ -24,10 +24,10 @@ function BookingCar({ match }) {
   const [showModal, setShowModal] = useState(false);
 
   useEffect(() => {
-    if (cars.length == 0) {
+    if (cars.length === 0) {
       dispatch(getAllCars());
     } else {
-      setcar(cars.find((o) => o._id == match.params.carid));
+      setcar(cars.find((o) => o._id === match.params.carid));
     }
   }, [cars]);
 
@@ -73,7 +73,7 @@ function BookingCar({ match }) {
         style={{ minHeight: "90vh" }}
       >
         <Col lg={10} sm={24} xs={24} className='p-3'>
-          <img src={car.image} className="carimg2 bs1 w-100" data-aos='flip-left' data-aos-duration='1500'/>
+          <img src={car.image} className="carimg2 bs1 w-100" data-aos='flip-left' data-aos-duration='1500' alt={car.name}/>
         </Col>
 
         <Col lg={10} sm={24} xs={24} className="text-right">
