@@ -3,7 +3,6 @@ const router = express.Router();
 const Booking = require("../models/bookingModel");
 const Car = require("../models/carModel");
 const { v4: uuidv4 } = require("uuid");
-require('dotenv').config();
 const stripe = require("stripe")(process.env.STRIPE_SECRET_KEY);
 router.post("/bookcar", async (req, res) => {
   const { token } = req.body;

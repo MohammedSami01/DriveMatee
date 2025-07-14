@@ -2,7 +2,7 @@ const mongoose = require("mongoose");
 
 function connectDB(){
 
-    mongoose.connect('mongodb+srv://sami:<db_password>@cluster0.w9qlbla.mongodb.net/DriveMate?retryWrites=true&w=majority', {useUnifiedTopology: true , useNewUrlParser: true})
+    mongoose.connect(process.env.MONGO_URI, { useUnifiedTopology: true, useNewUrlParser: true })
 
     const connection = mongoose.connection
 
@@ -13,8 +13,6 @@ function connectDB(){
     connection.on('error' , ()=>{
         console.log('Mongo DB Connection Error')
     })
-
-
 }
 
 connectDB()
