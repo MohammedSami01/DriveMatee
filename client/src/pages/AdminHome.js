@@ -2,13 +2,13 @@ import React, { useState, useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import DefaultLayout from "../components/DefaultLayout";
 import { deleteCar, getAllCars } from "../redux/actions/carsActions";
-import { Col, Row, Divider, DatePicker, Checkbox, Edit } from "antd";
+import { Col, Row, Popconfirm } from "antd";
 import { Link } from "react-router-dom";
 import Spinner from "../components/Spinner";
-import moment from "moment";
+
 import { DeleteOutlined, EditOutlined } from "@ant-design/icons";
-import { Popconfirm, message } from "antd";
-const { RangePicker } = DatePicker;
+
+
 function AdminHome() {
   const { cars } = useSelector((state) => state.carsReducer);
   const { loading } = useSelector((state) => state.alertsReducer);
@@ -17,7 +17,7 @@ function AdminHome() {
 
   useEffect(() => {
     dispatch(getAllCars());
-  }, []);
+  }, [dispatch]);
 
   useEffect(() => {
     setTotalcars(cars);

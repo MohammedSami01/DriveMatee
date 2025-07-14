@@ -16,7 +16,6 @@ function EditCar({ match }) {
     } else {
       settotalcars(cars);
       setcar(cars.find((o) => o._id === match.params.carid));
-      console.log(car);
     }
   }, [cars, dispatch, match.params.carid]);
 
